@@ -51,14 +51,14 @@ public class ClassifyModelImpl implements ClassifyModel {
     public void getClassify(String name, int id, final OnClassifyListener listener) {
         ServiceGenerator.createService(ClassifyInterface.class)
                 .getClassify(name, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(new Action1<TgClassifyWrapper>() {
                     @Override
                     public void call(TgClassifyWrapper tgClassifyWrapper) {
                         listener.before();
                     }
                 })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
                 .subscribe(new Action1<TgClassifyWrapper>() {
                     @Override
                     public void call(TgClassifyWrapper tgClassifyWrapper) {

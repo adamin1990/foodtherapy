@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,7 +14,10 @@ import com.adam.food.R;
 import com.adam.food.base.BaseActivity;
 import com.adam.food.domain.TgClassifyWrapper;
 import com.adam.food.presenter.main.ClassifyPresenter;
+import com.adam.food.utils.SnackBarUtils;
 
+import adamin.toolkits.utils.DialogUtil;
+import adamin.toolkits.utils.LogUtil;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -26,6 +30,7 @@ public class MainActivity extends BaseActivity
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     private ClassifyPresenter presenter;
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +38,16 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        init();
 
     }
 
     @Override
     protected void init() {
+        alertDialog= DialogUtil.buildCustomDialog(MainActivity.this,"加载中");
         presenter=new ClassifyPresenter(this);
         presenter.getClassify("food",0);
+
 
     }
 
@@ -78,21 +86,25 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void showLoading() {
+        alertDialog.show();
 
     }
 
     @Override
     public void hideLoaidng() {
+        alertDialog.dismiss();
 
     }
 
     @Override
     public void showError(Throwable throwable) {
+        SnackBarUtils.showSnackBar(MainActivity.this,"出错了"+throwable.getMessage(),SnackBarUtils.ERROR);
 
     }
 
     @Override
     public void setData(TgClassifyWrapper tgClassifyWrapper) {
+        LogUtil.error(MainActivity.class,tgClassifyWrapper.getTngou().get(0).getName());
 
     }
 

@@ -52,6 +52,6 @@ public interface ClassifyInterface {
      * @param id
      * @return
      */
-    @GET("/api/{name}}/classify")
+    @GET("api/{name}/classify/")
     Observable<TgClassifyWrapper> getClassify(@Path("name") String name, @Query("id") int id);
 }

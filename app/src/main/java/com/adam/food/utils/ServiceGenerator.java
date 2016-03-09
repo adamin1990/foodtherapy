@@ -43,7 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * //
  */
 public class ServiceGenerator {
-    public static final String BASE_URL="http://www.tngou.net/api";
+    public static final String BASE_URL="http://www.tngou.net/";
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
     private static Retrofit.Builder builder =
