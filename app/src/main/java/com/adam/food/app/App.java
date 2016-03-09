@@ -1,10 +1,7 @@
-package com.adam.food.presenter.main;
+package com.adam.food.app;
 
-import com.adam.food.domain.TgClassifyWrapper;
-import com.adam.food.model.main.ClassifyModel;
-import com.adam.food.model.main.ClassifyModelImpl;
-import com.adam.food.model.main.OnClassifyListener;
-import com.adam.food.view.main.MainView;
+import android.app.Application;
+import android.support.v7.app.AppCompatDelegate;
 
 /**
  * //                           o8888888o
@@ -37,46 +34,19 @@ import com.adam.food.view.main.MainView;
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
  * //
- * //         Created by LiTao on 2016-03-09-16:48.
+ * //         Created by LiTao on 2016-03-09-20:41.
  * //         Company: QD24so
  * //         Email: 14846869@qq.com
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class ClassifyPresenter implements OnClassifyListener {
-    private MainView mainView;
-    private ClassifyModel classifyModel;
-
-    public ClassifyPresenter(MainView mainView) {
-        this.mainView = mainView;
-        classifyModel=new ClassifyModelImpl();
-    }
-   public void getClassify(String name, int id){
-       classifyModel.getClassify(name,id,this);
-   }
-    @Override
-    public void before() {
-        mainView.showLoading();
-
+public class App extends Application {
+    static {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
     }
 
     @Override
-    public void onNext(TgClassifyWrapper tgClassifyWrapper) {
-        mainView.setData(tgClassifyWrapper);
-        mainView.hideLoaidng();
-
-    }
-
-    @Override
-    public void error(Throwable throwable) {
-        mainView.showError(throwable);
-        mainView.showErrorView();
-
-    }
-
-    @Override
-    public void complete() {
-        mainView.hideLoaidng();
-
+    public void onCreate() {
+        super.onCreate();
     }
 }
