@@ -6,6 +6,8 @@ import com.adam.food.model.main.ClassifyModelImpl;
 import com.adam.food.model.main.OnClassifyListener;
 import com.adam.food.view.main.MainView;
 
+import adamin.toolkits.utils.LogUtil;
+
 /**
  * //                           o8888888o
  * //                           88" . "88
@@ -56,6 +58,7 @@ public class ClassifyPresenter implements OnClassifyListener {
    }
     @Override
     public void before() {
+        LogUtil.error(ClassifyModelImpl.class,"before");
         mainView.showLoading();
 
     }
