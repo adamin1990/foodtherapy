@@ -47,6 +47,8 @@ public class MainActivity extends BaseActivity
         alertDialog= DialogUtil.buildCustomDialog(MainActivity.this,"加载中");
         presenter=new ClassifyPresenter(this);
         presenter.getClassify("food",0);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
 
 
     }
