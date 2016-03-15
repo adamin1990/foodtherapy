@@ -48,7 +48,7 @@ import rx.schedulers.Schedulers;
  */
 public class ClassifyModelImpl implements ClassifyModel {
     @Override
-    public void getClassify(String name, int id, final OnClassifyListener listener) {
+    public void getClassify(final String name, int id, final OnClassifyListener listener) {
         ServiceGenerator.createService(ClassifyInterface.class)
                 .getClassify(name, id)
                 .subscribeOn(Schedulers.io())
@@ -62,7 +62,7 @@ public class ClassifyModelImpl implements ClassifyModel {
                 .subscribe(new Action1<TgClassifyWrapper>() {
                     @Override
                     public void call(TgClassifyWrapper tgClassifyWrapper) {
-                        listener.onNext(tgClassifyWrapper);
+                        listener.onNext(tgClassifyWrapper,name);
                     }
 
                 }, new Action1<Throwable>() {

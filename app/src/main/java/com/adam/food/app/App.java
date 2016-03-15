@@ -3,6 +3,8 @@ package com.adam.food.app;
 import android.app.Application;
 import android.support.v7.app.AppCompatDelegate;
 
+import com.squareup.leakcanary.LeakCanary;
+
 /**
  * //                           o8888888o
  * //                           88" . "88
@@ -48,5 +50,6 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        LeakCanary.install(this);
     }
 }

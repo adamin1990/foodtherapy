@@ -43,7 +43,7 @@ public interface MainView {
     void showLoading();
     void hideLoaidng();
     void showError(Throwable throwable);
-    void setData(TgClassifyWrapper tgClassifyWrapper);
+    void setData(TgClassifyWrapper tgClassifyWrapper,String name);
     void showErrorView();
     void HideErrorView();
 }

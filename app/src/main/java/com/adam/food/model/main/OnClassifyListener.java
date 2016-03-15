@@ -41,7 +41,7 @@ import com.adam.food.domain.TgClassifyWrapper;
  */
 public interface OnClassifyListener {
     void before();
-    void onNext(TgClassifyWrapper tgClassifyWrapper);
+    void onNext(TgClassifyWrapper tgClassifyWrapper,String name);
     void error(Throwable throwable);
     void complete();
 }

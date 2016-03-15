@@ -64,8 +64,8 @@ public class ClassifyPresenter implements OnClassifyListener {
     }
 
     @Override
-    public void onNext(TgClassifyWrapper tgClassifyWrapper) {
-        mainView.setData(tgClassifyWrapper);
+    public void onNext(TgClassifyWrapper tgClassifyWrapper,String name) {
+        mainView.setData(tgClassifyWrapper,name);
         mainView.hideLoaidng();
 
     }
