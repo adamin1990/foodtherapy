@@ -1,4 +1,10 @@
-package com.adam.food.presenter.main;
+package com.adam.food.utils;
+
+import android.content.Context;
+
+import java.util.Random;
+
+import adamin.toolkits.R;
 
 /**
  * //                           o8888888o
@@ -31,11 +37,33 @@ package com.adam.food.presenter.main;
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
  * //
- * //         Created by LiTao on 2016-03-09-13:28.
+ * //         Created by LiTao on 2016-02-27-2:05.
  * //         Company: QD24so
  * //         Email: 14846869@qq.com
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class e {
+public class ColorUtils {
+    public static int getRandomColor(Context context) {
+        int randomColor = new Random().nextInt() % 8;
+        switch (randomColor) {
+            case 0:
+                return context.getResources().getColor(R.color.md_blue_grey_100);
+            case 1:
+                return context.getResources().getColor(R.color.md_blue_grey_100);
+            case 2:
+                return context.getResources().getColor(R.color.md_brown_100);
+            case 3:
+                return context.getResources().getColor(R.color.md_amber_a100);
+            case 4:
+                return context.getResources().getColor(R.color.md_cyan_100);
+            case 5:
+                return context.getResources().getColor(R.color.md_deep_orange_100);
+            case 6:
+                return context.getResources().getColor(R.color.md_deep_purple_100);
+            default:
+                return context.getResources().getColor(R.color.md_green_100);
+
+        }
+    }
 }

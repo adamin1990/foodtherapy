@@ -4,6 +4,10 @@ import com.adam.food.domain.TgClassifyWrapper;
 import com.adam.food.service.ClassifyInterface;
 import com.adam.food.utils.ServiceGenerator;
 
+import adamin.toolkits.utils.LogUtil;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -49,33 +53,57 @@ import rx.schedulers.Schedulers;
 public class ClassifyModelImpl implements ClassifyModel {
     @Override
     public void getClassify(final String name, int id, final OnClassifyListener listener) {
-        ServiceGenerator.createService(ClassifyInterface.class)
+        listener.before();
+        Observable<TgClassifyWrapper> observable = ServiceGenerator.createService(ClassifyInterface.class)
                 .getClassify(name, id)
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(new Action1<TgClassifyWrapper>() {
+                .doOnRequest(new Action1<Long>() {
                     @Override
-                    public void call(TgClassifyWrapper tgClassifyWrapper) {
-                        listener.before();
+                    public void call(Long aLong) {
+//                        listener.before();
+//                        LogUtil.error(ClassifyModelImpl.class,"之前"+aLong);
                     }
                 })
-                .subscribe(new Action1<TgClassifyWrapper>() {
-                    @Override
-                    public void call(TgClassifyWrapper tgClassifyWrapper) {
-                        listener.onNext(tgClassifyWrapper,name);
-                    }
+                .subscribeOn(Schedulers.io());
+        Subscriber<TgClassifyWrapper> subscriber = new Subscriber<TgClassifyWrapper>() {
+            @Override
+            public void onCompleted() {
+                listener.complete();
 
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        listener.error(throwable);
-                    }
-                }, new Action0() {
-                    @Override
-                    public void call() {
-                        listener.complete();
+            }
 
-                    }
-                });
+            @Override
+            public void onError(Throwable e) {
+                listener.error(e);
+
+            }
+
+            @Override
+            public void onNext(TgClassifyWrapper tgClassifyWrapper) {
+                listener.onNext(tgClassifyWrapper, name);
+
+            }
+        };
+        observable.subscribe(subscriber);
+
+//        .subscribe(new Action1<TgClassifyWrapper>() {
+//            @Override
+//            public void call(TgClassifyWrapper tgClassifyWrapper) {
+//                listener.onNext(tgClassifyWrapper,name);
+//            }
+//
+//        }, new Action1<Throwable>() {
+//            @Override
+//            public void call(Throwable throwable) {
+//                listener.error(throwable);
+//            }
+//        }, new Action0() {
+//            @Override
+//            public void call() {
+//                listener.complete();
+//
+//            }
+//        });
+
     }
 }

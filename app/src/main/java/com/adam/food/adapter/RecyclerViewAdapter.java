@@ -1,6 +1,7 @@
 package com.adam.food.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.adam.food.R;
 import com.adam.food.domain.TgClassify;
+import com.adam.food.view.list.foodlist.FoodListActivity;
 
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerViewAdapter(List<TgClassify> tgClassifies, Context context) {
         this.tgClassifies = tgClassifies;
         this.mContext = context;
-        typeface = Typeface.createFromAsset(context.getAssets(), "cdm.otf");
+        typeface = Typeface.createFromAsset(context.getAssets(), "eo.ttf");
     }
 
     @Override
@@ -46,10 +48,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (getItemViewType(position) == TYPE_ITEM) {
-            ((ItemHolder) holder).tvitem.setTypeface(typeface);
+//            ((ItemHolder) holder).tvitem.setTypeface(typeface);
             ((ItemHolder) holder).tvitem.setText(tgClassifies.get(position).getName() + "");
+            ((ItemHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(holder.itemView.getContext(), FoodListActivity.class);
+                    intent.putExtra("id",tgClassifies.get(position).getId());
+                    intent.putExtra("name",tgClassifies.get(position).getName()+"");
+                    holder.itemView.getContext().startActivity(intent);
+                }
+            });
+
         } else {
             ((FooterHolder) holder).tvfooter.setTypeface(typeface);
         }

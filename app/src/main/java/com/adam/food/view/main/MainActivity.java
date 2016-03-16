@@ -104,7 +104,8 @@ public class MainActivity extends BaseActivity
             }
         });
 
-
+//        pagerfood.setOffscreenPageLimit(15);
+//        pagerreceipe.setOffscreenPageLimit(20);
     }
 
     @Override
@@ -170,7 +171,6 @@ public class MainActivity extends BaseActivity
             receipepageradapter.notifyDataSetChanged();
 
         }
-        LogUtil.error(MainActivity.class, tgClassifyWrapper.getTngou().get(0).getName());
 
     }
 

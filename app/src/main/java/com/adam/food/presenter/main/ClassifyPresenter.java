@@ -58,7 +58,6 @@ public class ClassifyPresenter implements OnClassifyListener {
    }
     @Override
     public void before() {
-        LogUtil.error(ClassifyModelImpl.class,"before");
         mainView.showLoading();
 
     }
