@@ -21,6 +21,7 @@ import com.adam.food.domain.TgClassify;
 import com.adam.food.domain.TgClassifyWrapper;
 import com.adam.food.presenter.main.ClassifyPresenter;
 import com.adam.food.utils.SnackBarUtils;
+import com.umeng.update.UmengUpdateAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,7 @@ public class MainActivity extends BaseActivity
 
 //        pagerfood.setOffscreenPageLimit(15);
 //        pagerreceipe.setOffscreenPageLimit(20);
+        UmengUpdateAgent.update(this);
     }
 
     @Override

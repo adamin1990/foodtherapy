@@ -3,6 +3,18 @@
     package="com.adam.food">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".app.App"
@@ -24,7 +36,56 @@
         <activity
             android:name=".view.list.foodlist.FoodListActivity"
             android:label="@string/title_activity_food_list"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.detail.FoodDetailActivity"
+            android:label="@string/title_activity_food_detail"
             android:theme="@style/AppTheme"></activity>
+
+
+        <service
+            android:name="com.iflytek.voiceads.update.DownloadService"/>
+
+        <activity
+            android:name="com.iflytek.voiceads.request.IFLYBrowser"
+            android:screenOrientation="portrait" />
+        <meta-data  android:name="IFLYTEK_APPKEY_AD" android:value="55813f73"/>
+        <!--<meta-data-->
+            <!--android:name="com.google.android.gms.version"-->
+            <!--android:value="8115000" />-->
+        <!--<activity android:name="com.google.android.gms.ads.AdActivity"-->
+            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"-->
+            <!--android:theme="@android:style/Theme.Translucent" />-->
+
+        <!--&lt;!&ndash; JD&ndash;&gt;-->
+
+        <!--<activity android:name="com.jdwx.sdk.JDAdBrowser" android:screenOrientation="portrait" >-->
+        <!--</activity>-->
+
+
+        <!-- Update Activitys Start -->
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+
+        <!-- Update Activitys End -->
+
+        <!-- Caution! Do not change this app key. It is only for demo usage. -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="558154f667e58ef3b2000cbf" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" >
+        </meta-data>
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+
     </application>
 
 </manifest>

@@ -1,8 +1,11 @@
 package com.adam.food.view.list.foodlist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,6 +21,7 @@ import com.adam.food.domain.foodlist.TgFoodList;
 import com.adam.food.domain.foodlist.TgFoodListWrapper;
 import com.adam.food.presenter.list.FoodListPresenter;
 import com.adam.food.utils.SnackBarUtils;
+import com.adam.food.view.detail.FoodDetailActivity;
 import com.adamin.superrecyclerview.animator.adapters.SlideInLeftAnimationAdapter;
 import com.adamin.superrecyclerview.superrecycer.OnMoreListener;
 import com.adamin.superrecyclerview.superrecycer.SuperRecyclerView;
@@ -120,7 +124,11 @@ public class FoodListActivity extends BaseActivity implements FoodListView {
         adapter.setOnItemClickListener(new FoodListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                SnackBarUtils.showSnackBar(FoodListActivity.this, tgFoodLists.get(position).getName() + "", SnackBarUtils.SUCCESS);
+               ActivityOptionsCompat compat= ActivityOptionsCompat.makeSceneTransitionAnimation(FoodListActivity.this,view,"transitionimg");
+                Intent intent=new Intent(FoodListActivity.this,FoodDetailActivity.class);
+                intent.putExtra("name",tgFoodLists.get(position).getName()+"");
+                intent.putExtra("id",tgFoodLists.get(position).getId());
+                ActivityCompat.startActivity(FoodListActivity.this,intent,compat.toBundle());
             }
         });
 
