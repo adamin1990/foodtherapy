@@ -15,3 +15,13 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn com.iflytek.voiceads.**
+
+-dontwarn com.google.ads.**
+
+-keep class com.tencent.mm.sdk.** {
+   *;
+}
+-keep class com.jdwx.sdk.**{
+  *;
+}
